@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 window.addEventListener('load', ()=> {
   const btnFetch = document.querySelector('#btn-fetch');
