@@ -27,6 +27,17 @@ window.addEventListener('load', () => {
 
 // Ex 1-선택된 이미지 보여주기:event target
 window.addEventListener('load', () => {
+  const section = document.querySelector('#section1');
+  const currentImg = section.querySelector('.current-img');
+  const imgs = section.querySelectorAll('.img');
+
+  const onclick = function(event) {
+    currentImg.src = event.target.src;
+  }
+
+  imgs.forEach((img) => {
+    img.addEventListener('click', onclick);
+  });
 
 });
 
