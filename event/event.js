@@ -22,6 +22,9 @@ window.addEventListener('load', () => {
 
 // 연습문제 1-선택된 레코드 삭제하기:event target
 window.addEventListener('load', () => {
+  const section = document.querySelector('#section1-1');
+  const tbody = section.querySelector('tbody');
+  const buttons = tbody.querySelectorAll('input');
 
 });
 
@@ -32,6 +35,7 @@ window.addEventListener('load', () => {
   const imgs = section.querySelectorAll('.img');
 
   const onclick = function(event) {
+    // console.log(event.target);
     currentImg.src = event.target.src;
   }
 
