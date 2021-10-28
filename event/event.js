@@ -7,16 +7,62 @@ window.addEventListener('load', () => {
 
 // EX4-서로 다른 기능의 여러 버튼을 가진 화면에서 이벤트를
 window.addEventListener('load', () => {
+  const section = document.querySelector('#section4');
+  const tbody = section.querySelector('tbody');
+  
+  tbody.addEventListener('click', (event) => {
+    const target = event.target;
 
+    if (target.nodeName !== 'INPUT') return;
+
+    const list = target.classList;
+
+    if (list.contains('sel-button')) {
+      let tr = target.parentElement;
+      while (tr.nodeName !== 'TR') {
+        tr = tr.parentElement;
+      }
+      tr.style.background = 'yellow';
+    } 
+    else if (list.contains('edit-button')) {
+      console.log('edit');
+    }
+    else if (list.contains('del-button')) {
+      console.log('del');
+    }
+  });
 });
 
 // Ex3-이벤트 버블링 멈추기
 window.addEventListener('load', () => {
+  const section = document.querySelector('#section3');
+  const imgList = section.querySelector('.img-list');
+  const addButton = section.querySelector('.add-button');
+  const currentImg = section.querySelector('.current-img');
 
+  imgList.addEventListener('click', (event) => {
+    if (event.target.nodeName !== 'IMG') return;
+    currentImg.src = event.target.src;
+  });
+
+  addButton.addEventListener('click', (event) => {
+    event.stopPropagation();
+    const img = document.createElement('img');
+    img.src = 'images/img1.jpg';
+    currentImg.insertAdjacentElement('afterend', img);
+  });
 });
 
 // Ex2-버블링을 이용한 사용자 이벤트 처리하기
 window.addEventListener('load', () => {
+  const section = document.querySelector('#section2');
+  const currentImg = section.querySelector('.current-img');
+  const imgList = section.querySelector('.img-list');
+
+  imgList.addEventListener('click', (event) => {
+    if (event.target.nodeName !== 'IMG') return;
+    currentImg.src = event.target.src;
+  });
 
 });
 
