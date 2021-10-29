@@ -26,6 +26,14 @@ window.addEventListener('load', () => {
   const tbody = section.querySelector('tbody');
   const buttons = tbody.querySelectorAll('input');
 
+  const onclick = (event) => {
+    console.log(event.target.parentNode.parentNode);
+    tbody.removeChild(event.target.parentNode.parentNode);
+  }
+
+  buttons.forEach((item) => {
+    item.addEventListener('click', onclick);
+  });
 });
 
 // Ex 1-선택된 이미지 보여주기:event target
