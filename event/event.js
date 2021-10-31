@@ -1,8 +1,41 @@
 'use strict';
 
+// 마우스이벤트객체 - 드레그로 이동
+window.addEventListener('load', () => {
+  const section = document.querySelector('#section7');
+  const container = section.querySelector('.container');
+  const box = section.querySelector('.box');
+  let mouseDown = false;
+  const offset = {x:0, y:0};
+
+  box.addEventListener('mousedown', function(e) {
+    mouseDown = true;
+    offset.x = e.offsetX;
+    offset.y = e.offsetY;
+  });
+
+  container.addEventListener('mousemove', function(e) {
+    if (mouseDown === false) return;
+
+    box.style.left = `${e.pageX - offset.x}px`;
+    box.style.top = `${e.pageY - offset.y}px`;
+  });
+
+  box.addEventListener('mouseup', function(e) {
+    mouseDown = false;
+  });
+});
+
 // 마우스이벤트객체 - 마우스 좌표
 window.addEventListener('load', () => {
+  const section = document.querySelector('#section6');
+  const container = section.querySelector('.container');
+  const box = section.querySelector('.box');
 
+  container.onclick = function(e) {
+    box.style.left = `${e.pageX}px`;
+    box.style.top = `${e.pageY}px`;
+  };
 });
 
 // EX-5 Trigger
