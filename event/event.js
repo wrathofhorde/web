@@ -5,6 +5,22 @@ window.addEventListener('load', () => {
 
 });
 
+// EX-5 Trigger
+window.addEventListener('load', () => {
+  const section = document.querySelector('#section5');
+  const fileButton = section.querySelector('.file-button');
+  const triggerButton = section.querySelector('.file-trigger-button');
+
+  triggerButton.onclick = function() {
+    const event = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true,
+    });
+    fileButton.dispatchEvent(event);
+  };
+});
+
 // EX4-서로 다른 기능의 여러 버튼을 가진 화면에서 이벤트를
 window.addEventListener('load', () => {
   const section = document.querySelector('#section4');
@@ -13,7 +29,11 @@ window.addEventListener('load', () => {
   tbody.addEventListener('click', (event) => {
     const target = event.target;
 
-    if (target.nodeName !== 'INPUT') return;
+    if (target.nodeName !== 'INPUT' && target.nodeName !== 'A') return;
+
+    if (target.nodeName === 'A') {
+      event.preventDefault();
+    }
 
     const list = target.classList;
 
