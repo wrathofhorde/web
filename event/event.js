@@ -1,5 +1,72 @@
 'use strict';
 
+// 마우스이벤트객체 - 상대좌표 이용
+window.addEventListener('load', () => {
+  const section = document.querySelector('#section9');
+  const container = section.querySelector('.container');
+  const boxes = section.querySelectorAll('.box');
+  const offset = {x:0, y:0};
+  
+  let mouseDown = false;
+  let current = null;
+  const top = container.offsetTop;
+  const left = container.offsetLeft;
+
+  console.log(top);
+  console.log(left);
+
+  boxes.forEach((box) => {
+    box.addEventListener('mousedown', function(e) {
+      mouseDown = true;
+      current = box;
+      offset.x = e.offsetX;
+      offset.y = e.offsetY;
+    });
+
+    box.addEventListener('mouseup', function(e) {
+      mouseDown = false;
+    });
+  });
+
+  container.addEventListener('mousemove', function(e) {
+    if (mouseDown === false) return;
+
+    current.style.left = `${e.pageX - offset.x - left}px`;
+    current.style.top = `${e.pageY - offset.y - top}px`;
+  });
+});
+
+// 마우스이벤트객체 - 여러게 박스 드레그로 이동
+window.addEventListener('load', () => {
+  const section = document.querySelector('#section8');
+  const container = section.querySelector('.container');
+  const boxes = section.querySelectorAll('.box');
+  const offset = {x:0, y:0};
+  
+  let mouseDown = false;
+  let current = null;
+
+  boxes.forEach((box) => {
+    box.addEventListener('mousedown', function(e) {
+      mouseDown = true;
+      current = box;
+      offset.x = e.offsetX;
+      offset.y = e.offsetY;
+    });
+
+    box.addEventListener('mouseup', function(e) {
+      mouseDown = false;
+    });
+  });
+
+  container.addEventListener('mousemove', function(e) {
+    if (mouseDown === false) return;
+
+    current.style.left = `${e.pageX - offset.x}px`;
+    current.style.top = `${e.pageY - offset.y}px`;
+  });
+});
+
 // 마우스이벤트객체 - 드레그로 이동
 window.addEventListener('load', () => {
   const section = document.querySelector('#section7');
