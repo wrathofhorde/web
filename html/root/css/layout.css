@@ -1,0 +1,25 @@
+@import url("reset.css");
+
+#header {
+  position: sticky;
+  top:0px;
+  height: 100px;
+  width: 100%;
+  background: beige;
+}
+#s1>ul {
+  background: grey;
+  height: 200px;
+}
+
+#s1>ul>li:nth-child(1) {
+  background: red;
+}
+
+#s1>ul>li:nth-child(2) {
+  background: greenyellow;
+}
+
+#s1>ul>li:nth-child(3) {
+  background: blueviolet;
+}

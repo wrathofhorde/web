@@ -5,186 +5,205 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/style.css" defer>
 </head>
 <body>
-  <a href="../index.html">홈</a>
-  <a href="../member/signup-agree.html">회원가입 동의</a>
-  <a href="../member/login.html">로그인</a>
-  <a href="list.html">공지사항</a>
-
-  <h1>공지사항 목록 페이지</h1>
-
-  <header>
-    <section>
-      <h1>서두</h1>
-      <nav>
-        <h1>메인메뉴</h1>
-        <ul>
-          <li><a href="#">학습가이드</a></li>
-          <li><a href="#">강좌선택</a></li>
-          <li><a href="#">AnswerIs</a></li>
-        </ul>
-      </nav>
-    
-      <section>
-        <h1>강좌검색</h1>
-        <form>
-          <fieldset>
-            <legend>검색입력필드</legend>
-            <label>과정검색</label>
-            <input type="text">
-            <input type="submit" value="검색">
-          </fieldset>
-        </form>
-      </section>
-  
-      <nav>
-        <h1>회원메뉴</h1>
-        <ul>
-          <li><a href="../index.html">HOME</a></li>
-          <li><a href="../member/login.html">로그인</a></li>
-          <li><a href="../member/signup-agree.html">회원가입</a></li>
-        </ul>
-      </nav>
+  <!-- header box ------------------------------------------------------------ -->
+  <header id="header">
+    <div class="content-box">
+      <!-- <h1>공지사항 목록 페이지</h1>
+      <a href="../index.html">홈</a>
+      <a href="../member/signup-agree.html">회원가입 동의</a>
+      <a href="../member/login.html">로그인</a>
+      <a href="list.html">공지사항</a>
       
-      <nav>
-        <h1>바로가기메뉴</h1>
-        <ul>
-          <li><a href="#">미이페이지</a></li>
-          <li><a href="">고객센터</a></li>
-        </ul>
-      </nav>
-    </section>
-
+      <section>
+        <h1>서두</h1>
+        <nav>
+          <h1>메인메뉴</h1>
+          <ul>
+            <li><a href="#">학습가이드</a></li>
+            <li><a href="#">강좌선택</a></li>
+            <li><a href="#">AnswerIs</a></li>
+          </ul>
+        </nav>
+      
+        <section>
+          <h1>강좌검색</h1>
+          <form>
+            <fieldset>
+              <legend>검색입력필드</legend>
+              <label>과정검색</label>
+              <input type="text">
+              <input type="submit" value="검색">
+            </fieldset>
+          </form>
+        </section>
+    
+        <nav>
+          <h1>회원메뉴</h1>
+          <ul>
+            <li><a href="../index.html">HOME</a></li>
+            <li><a href="../member/login.html">로그인</a></li>
+            <li><a href="../member/signup-agree.html">회원가입</a></li>
+          </ul>
+        </nav>
+        
+        <nav>
+          <h1>바로가기메뉴</h1>
+          <ul>
+            <li><a href="#">미이페이지</a></li>
+            <li><a href="">고객센터</a></li>
+          </ul>
+        </nav>
+      </section> -->
+    </div>
   </header>
 
-  <aside>
-    <h1>고객센터</h1>
-    <nav>
-      <h1>고객센터메뉴</h1>
-      <ul>
-        <li><a href="">공지사항</a></li>
-        <li><a href="#">자주하는 질문</a></li>
-        <li><a href="#">수강문의</a></li>
-        <li><a href="#">이벤트</a></li>
-      </ul>
-    </nav>
-  
-    <nav>
-      <h1>협력업체</h1>
-      <ul>
-        <li><a href="">노트펍스</a></li>
-        <li><a href="">나무랩연구소</a></li>
-      </ul>
-    </nav>
-  </aside>
+  <!-- visual box ------------------------------------------------------------ -->
+  <div id="visual">
+    <div class="content-box">
 
-  <main>
-    <section>
-      <h1>공지사항</h1>
-      <nav>
-        <h1>경로</h1>
-        <ol>
-          <li><a href="../index.html">Home</a></li>
-          <li><a href="#">고객센터</a></li>
-          <li><a href="#">공지사항</a></li>
-        </ol>
-      </nav>
-    
-      <section>
-        <h1>공지사항검색폼</h1>
-        <form>
-          <fieldset>
-            <legend>검색어 입력필드</legend>
-            <label>검색분류</label>
-            <select>
-              <option value="title">제목</option>
-              <option value="writer">작성자</option>
-            </select>
-            <label>검색어</label>
-            <input type="text">
-            <input type="submit" value="검색">
-          </fieldset>
-        </form>
-      </section>
-    
-      <section>
-        <table border="1">
-          <tr>
-            <td>번호</td>
-            <td>제목</td>
-            <td>작성자</td>
-            <td>작성일</td>
-            <td>조회수</td>
-          </tr>
-          <tr>
-            <td>3</td>
-            <td><a href="detail.html">한사람을 위한 마음</a></td>
-            <td>오태호</td>
-            <td>2021-01-19</td>
-            <td>3</td>
-          </tr>
-          <tr>
-            <td>2</td>
-            <td><a href="detail.html">오래전 그날</a></td>
-            <td>박주연</td>
-            <td>2021-03-07</td>
-            <td>5</td>
-          <tr>
-            <td>1</td>
-            <td><a href="detail.html">어디선가 나의 노랠 듣고 있을 너에게</a></td>
-            <td>정석원</td>
-            <td>2021-05-01</td>
-            <td>7</td>
-          </tr>
-        </table>
-      </section>
-    
-      <section>
-        <h1>페이지 정보</h1>
-        <div>
-          1 / 1 pages
-        </div>
-      </section>
-  
-      <section>
-        <h1>페이저</h1>
-        <div>
-          <div>이전</div>
+    </div>
+  </div>
+
+  <!-- body box ------------------------------------------------------------ -->
+  <div id="body">
+    <div class="content-box">
+      <aside id="aside">
+        <!-- <h1>고객센터</h1>
+        <nav>
+          <h1>고객센터메뉴</h1>
           <ul>
-            <li><a href="">1</a></li>
-            <li><a href="">2</a></li>
-            <li><a href="">3</a></li>
-            <li><a href="">4</a></li>
-            <li><a href="">5</a></li>
+            <li><a href="">공지사항</a></li>
+            <li><a href="#">자주하는 질문</a></li>
+            <li><a href="#">수강문의</a></li>
+            <li><a href="#">이벤트</a></li>
           </ul>
-          <div>다음</div>
-        </div>
-      </section>
-    </section>
-  </main>
-
-  <footer>
-    <section>
-      <h1>정보</h1>
-      <section>
-        <h1>소유권자정보</h1>
-        <dl>
-          <dt>주소:</dt>
-          <dd>Reprehenderit voluptate eiusmod do dolore nostrud fugiat sint sit commodo.</dd>
-          <dt>이메일</dt>
-          <dd>Laboris ad incididunt occaecat</dd>
-        </dl>
-      </section>
+        </nav>
+      
+        <nav>
+          <h1>협력업체</h1>
+          <ul>
+            <li><a href="">노트펍스</a></li>
+            <li><a href="">나무랩연구소</a></li>
+          </ul>
+        </nav> -->
+      </aside>
     
-      <section>
-        <h1>저작자정보</h1>
-        <div>
-        copyright Excepteur aliquip sint incididunt minim amet amet cupidatat velit eu.
-        </div>
-      </section>
-    </section>
+      <main id="main">
+        <!-- <section>
+          <h1>공지사항</h1>
+          <nav>
+            <h1>경로</h1>
+            <ol>
+              <li><a href="../index.html">Home</a></li>
+              <li><a href="#">고객센터</a></li>
+              <li><a href="#">공지사항</a></li>
+            </ol>
+          </nav>
+        
+          <section>
+            <h1>공지사항검색폼</h1>
+            <form>
+              <fieldset>
+                <legend>검색어 입력필드</legend>
+                <label>검색분류</label>
+                <select>
+                  <option value="title">제목</option>
+                  <option value="writer">작성자</option>
+                </select>
+                <label>검색어</label>
+                <input type="text">
+                <input type="submit" value="검색">
+              </fieldset>
+            </form>
+          </section>
+        
+          <section>
+            <table border="1">
+              <tr>
+                <td>번호</td>
+                <td>제목</td>
+                <td>작성자</td>
+                <td>작성일</td>
+                <td>조회수</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td><a href="detail.html">한사람을 위한 마음</a></td>
+                <td>오태호</td>
+                <td>2021-01-19</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td><a href="detail.html">오래전 그날</a></td>
+                <td>박주연</td>
+                <td>2021-03-07</td>
+                <td>5</td>
+              <tr>
+                <td>1</td>
+                <td><a href="detail.html">어디선가 나의 노랠 듣고 있을 너에게</a></td>
+                <td>정석원</td>
+                <td>2021-05-01</td>
+                <td>7</td>
+              </tr>
+            </table>
+          </section>
+        
+          <section>
+            <h1>페이지 정보</h1>
+            <div>
+              1 / 1 pages
+            </div>
+          </section>
+      
+          <section>
+            <h1>페이저</h1>
+            <div>
+              <div>이전</div>
+              <ul>
+                <li><a href="">1</a></li>
+                <li><a href="">2</a></li>
+                <li><a href="">3</a></li>
+                <li><a href="">4</a></li>
+                <li><a href="">5</a></li>
+              </ul>
+              <div>다음</div>
+            </div>
+          </section>
+        </section> -->
+      </main> 
+    </div>
+  </div>
+
+  <!-- footer box ------------------------------------------------------------ -->
+  <footer id="footer">
+    <div class="content-box">
+      <!-- 
+        <section>
+        <h1>정보</h1>
+        <section>
+          <h1>소유권자정보</h1>
+          <dl>
+            <dt>주소:</dt>
+            <dd>Reprehenderit voluptate eiusmod do dolore nostrud fugiat sint sit commodo.</dd>
+            <dt>이메일</dt>
+            <dd>Laboris ad incididunt occaecat</dd>
+          </dl>
+        </section>
+      
+        <section>
+          <h1>저작자정보</h1>
+          <div>
+          copyright Excepteur aliquip sint incididunt minim amet amet cupidatat velit eu.
+          </div>
+        </section>
+      </section> 
+      -->
+    </div>
   </footer>
+
 </body>
 </html>
