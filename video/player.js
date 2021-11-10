@@ -54,8 +54,8 @@ function getVideoCover(src, seekTo = 0.5) {
               console.log(`video is now paused at ${seekTo}s`);
               // define a canvas to have the same dimension as the video
               const canvas = document.createElement('canvas');
-              canvas.width = video.videoWidth;
-              canvas.height = video.videoHeight;
+              canvas.width = video.videoWidth / 4;
+              canvas.height = video.videoHeight / 4;
               // draw the video frame to canvas
               const ctx = canvas.getContext('2d');
               ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
