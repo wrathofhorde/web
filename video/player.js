@@ -3,15 +3,41 @@
 window.addEventListener('load', ()=> {
   const player = document.querySelector('#player');
   const picker = document.querySelector('#file-picker');
-  
+
+  // click event trigger
+  player.addEventListener('click', () => {
+    const click = new MouseEvent('click', {
+      view: window,
+      bubbles: true,
+      cancelable: true
+    });
+    picker.dispatchEvent(click);
+  });
+
   picker.addEventListener('change', (event)=>{
     const file = picker.files[0];
-    console.log(file);
+    // console.log(file);
+    file.arrayBuffer().then(value => {
+      const [E, X, T, D] = [69, 88, 84, 68];
+      let index = 0;
+      const buffer = new Uint8Array(value);
+      
+      while (true) {
+        index = buffer.indexOf(E, index);
+        if (index === -1) break;
+        if (index + 3 >= buffer.length) break;
+
+        if (buffer[index + 1] === X && buffer[index + 2] === T && buffer[index + 3] === D) {
+          console.log("find!!!");
+          break;
+        }
+        ++index;
+      }
+    });
+    
     const url = URL.createObjectURL(file); 
     // console.log(url);
-    // player.setAttribute("src", url); 
-    // player.play();
-    getVideoCover(url, 0.5)
+    getVideoCover(url, 0)
       .then(value => {
         console.log(value);
         const dotIndex = file.name.lastIndexOf('.');
@@ -24,11 +50,13 @@ window.addEventListener('load', ()=> {
         alink.click();
       })
       .catch(e => console.log(e));
+      player.setAttribute('src', url); 
+      player.play();
   });
 });
 
 function getVideoCover(src, seekTo = 0.5) {
-  console.log("getting video cover for file: ", src);
+  console.log(`getting video cover for file: ${src}`);
   return new Promise((resolve) => {
       // load the file to a video player
       const video = document.createElement('video');

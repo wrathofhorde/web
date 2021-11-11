@@ -9,8 +9,10 @@
   <link rel="stylesheet" href="player.css">
 </head>
 <body>
-  <input type="file" id="file-picker" accept=".mp4">
+  <video type="video/mp4" id="player" 
+    controls controlslist="nodownload nofullscreen" 
+    disablepictureinpicture></video>
   <br>
-  <video type="video/mp4" id="player" controls controlslist="nodownload nofullscreen" disablepictureinpicture></video>
+  <input hidden = true type="file" id="file-picker" accept=".mp4">
 </body>
 </html>
