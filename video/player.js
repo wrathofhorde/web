@@ -6,6 +6,8 @@ window.addEventListener('load', ()=> {
 
   // click event trigger
   player.addEventListener('click', () => {
+    player.pause();
+    
     const click = new MouseEvent('click', {
       view: window,
       bubbles: true,
@@ -16,42 +18,74 @@ window.addEventListener('load', ()=> {
 
   picker.addEventListener('change', (event)=>{
     const file = picker.files[0];
-    // console.log(file);
-    file.arrayBuffer().then(value => {
-      const [E, X, T, D] = [69, 88, 84, 68];
-      let index = 0;
-      const buffer = new Uint8Array(value);
-      
-      while (true) {
-        index = buffer.indexOf(E, index);
-        if (index === -1) break;
-        if (index + 3 >= buffer.length) break;
 
-        if (buffer[index + 1] === X && buffer[index + 2] === T && buffer[index + 3] === D) {
-          console.log("find!!!");
-          break;
-        }
-        ++index;
-      }
-    });
-    
-    const url = URL.createObjectURL(file); 
-    // console.log(url);
-    getVideoCover(url, 0)
-      .then(value => {
-        console.log(value);
+    if (file === undefined) return;
+
+    waitAll()
+      .then(values => {
+        console.log(values);
+        const data = values[0];
+        const img = values[1];
         const dotIndex = file.name.lastIndexOf('.');
         const name = file.name.substring(0, dotIndex + 1) + 'jpg';
-        console.log(name);
+
         const alink = document.createElement('a');
         alink.setAttribute('download', name);
-        // alink.setAttribute('href', canvas.toDataURL("image/png"));
-        alink.setAttribute('href', URL.createObjectURL(value));
+        alink.setAttribute('href', URL.createObjectURL(img));
         alink.click();
+
+        player.setAttribute('src', URL.createObjectURL(file));
+        player.play();
       })
-      .catch(e => console.log(e));
-      player.setAttribute('src', url); 
-      player.play();
+
+    async function getDriveData() {
+      let count = 0;
+      const driveData = [];
+      const DATA_OF_ONESEC = 40;
+      const value = await file.arrayBuffer();
+      const sep = 'EXTD,';
+      const [E, X, T, D, COMMA] = [
+        sep.charCodeAt(0), sep.charCodeAt(1), sep.charCodeAt(2), sep.charCodeAt(3), sep.charCodeAt(4)];
+      let begin = 0, end = 0;
+      const buffer = new Uint8Array(value);
+      let onesecData;
+      
+      while (true) {
+        begin = buffer.indexOf(E, begin);
+        if (begin === -1) break;
+        if (begin + 3 >= buffer.length) break;
+        if (buffer[begin + 1] === X && buffer[begin + 2] === T && buffer[begin + 3] === D) {
+          if (count % DATA_OF_ONESEC === 0) {
+            onesecData = new Array();
+            driveData.push(onesecData);
+          }
+          ++count;
+          end = buffer.indexOf(COMMA, begin);
+          // console.log(String.fromCharCode.apply(null, buffer.subarray(begin + 5, end)));
+          const record = new DriveRecord(String.fromCharCode.apply(null, buffer.subarray(begin + 5, end)));
+          onesecData.push(record);
+        }
+        ++begin;
+      }
+      // console.log(driveData);
+      return driveData;
+    }
+
+    async function waitAll() {
+      const url = URL.createObjectURL(file);
+      const driveData = getDriveData();
+      const getCover = getVideoCover(url, 0);
+
+      return await Promise.all([driveData, getCover]);
+    }
+
+    function DriveRecord(str) {
+      const arr = str.split('/');
+      this.valid = arr[0] === '1';
+      this.longitude = parseFloat(arr[1]);
+      this.latitude = parseFloat(arr[2]);
+      this.speed = parseInt(arr[3]);
+    }
   });
 });
 
@@ -79,7 +113,7 @@ function getVideoCover(src, seekTo = 0.5) {
           }, 200);
           // extract video thumbnail once seeking is complete
           video.addEventListener('seeked', () => {
-              console.log(`video is now paused at ${seekTo}s`);
+              // console.log(`video is now paused at ${seekTo}s`);
               // define a canvas to have the same dimension as the video
               const canvas = document.createElement('canvas');
               canvas.width = video.videoWidth / 4;
