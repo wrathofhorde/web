@@ -1,19 +1,38 @@
 "use strict";
 
 window.addEventListener('load', ()=> {
+  let driveData;
   const player = document.querySelector('#player');
   const picker = document.querySelector('#file-picker');
 
-  // click event trigger
   player.addEventListener('click', () => {
     player.pause();
-    
     const click = new MouseEvent('click', {
       view: window,
       bubbles: true,
       cancelable: true
     });
     picker.dispatchEvent(click);
+  });
+
+  player.addEventListener('timeupdate', (e) => {
+    if (driveData.length === 0) return;
+    const onemsec = 1000;
+    const currentTime = player.currentTime;
+    let sec = Math.floor(currentTime);
+    const msec = Math.floor(currentTime * onemsec) - sec * onemsec;
+    
+    if (sec >= driveData.length) {
+      console.log(`sec:${sec}, length:${driveData.length}`);
+      sec = driveData.length;
+    }
+      
+
+    console.log(`curr:${currentTime}, sec:${sec}, msec:${msec}`);
+
+    const data = driveData[sec];
+    console.log(data);
+
   });
 
   picker.addEventListener('change', (event)=>{
@@ -24,7 +43,7 @@ window.addEventListener('load', ()=> {
     waitAll()
       .then(values => {
         console.log(values);
-        const data = values[0];
+        driveData = values[0];
         const img = values[1];
         const dotIndex = file.name.lastIndexOf('.');
         const name = file.name.substring(0, dotIndex + 1) + 'jpg';
