@@ -16,6 +16,7 @@ window.addEventListener('load', ()=> {
   });
 
   player.addEventListener('timeupdate', (e) => {
+    // console.log(`timeupdate:${driveData.length}`);
     if (driveData.length === 0) return;
     const onemsec = 1000;
     const currentTime = player.currentTime;
@@ -23,16 +24,14 @@ window.addEventListener('load', ()=> {
     const msec = Math.floor(currentTime * onemsec) - sec * onemsec;
     
     if (sec >= driveData.length) {
-      console.log(`sec:${sec}, length:${driveData.length}`);
+      // console.log(`sec:${sec}, length:${driveData.length}`);
       sec = driveData.length;
     }
-      
-
-    console.log(`curr:${currentTime}, sec:${sec}, msec:${msec}`);
-
-    const data = driveData[sec];
-    console.log(data);
-
+    // console.log(`curr:${currentTime}, sec:${sec}, msec:${msec}`);
+    for (let i = 0; i < sec; ++i) {
+      const data = driveData[sec];
+      // console.log(data);
+    }
   });
 
   picker.addEventListener('change', (event)=>{
@@ -40,22 +39,7 @@ window.addEventListener('load', ()=> {
 
     if (file === undefined) return;
 
-    waitAll()
-      .then(values => {
-        console.log(values);
-        driveData = values[0];
-        const img = values[1];
-        const dotIndex = file.name.lastIndexOf('.');
-        const name = file.name.substring(0, dotIndex + 1) + 'jpg';
-
-        const alink = document.createElement('a');
-        alink.setAttribute('download', name);
-        alink.setAttribute('href', URL.createObjectURL(img));
-        alink.click();
-
-        player.setAttribute('src', URL.createObjectURL(file));
-        player.play();
-      })
+    waitAll().catch(e => alert(e));
 
     async function getDriveData() {
       let count = 0;
@@ -92,10 +76,20 @@ window.addEventListener('load', ()=> {
 
     async function waitAll() {
       const url = URL.createObjectURL(file);
-      const driveData = getDriveData();
-      const getCover = getVideoCover(url, 0);
-
-      return await Promise.all([driveData, getCover]);
+      const values = await Promise.all(
+        [getDriveData(), getVideoCover(url, 0)]
+      );
+      driveData = values[0];
+      const img = values[1];
+      const dotIndex = file.name.lastIndexOf('.');
+      const name = file.name.substring(0, dotIndex + 1) + 'jpg';
+      const alink = document.createElement('a');
+      alink.setAttribute('download', name);
+      alink.setAttribute('href', URL.createObjectURL(img));
+      alink.click();
+      player.setAttribute('src', url);
+      player.volume = 0.5;
+      player.play();
     }
 
     function DriveRecord(str) {
@@ -105,50 +99,51 @@ window.addEventListener('load', ()=> {
       this.latitude = parseFloat(arr[2]);
       this.speed = parseInt(arr[3]);
     }
+
+    function getVideoCover(src, seekTo = 0.5) {
+      console.log(`getting video cover for file: ${src}`);
+      return new Promise((resolve) => {
+        // load the file to a video player
+        const video = document.createElement('video');
+        video.setAttribute('src', src);
+        video.load();
+        video.addEventListener('error', (e) => {
+            console.log(`error when loading video file ${e}`);
+            return new Error(e);
+        });
+    
+        // load metadata of the video to get video duration and dimensions
+        video.addEventListener('loadedmetadata', () => {
+            // seek to user defined timestamp (in seconds) if possible
+            if (video.duration < seekTo) {
+                return new Error('video is too short.');
+            }
+            // delay seeking or else 'seeked' event won't fire on Safari
+            setTimeout(() => {
+              video.currentTime = seekTo;
+            }, 200);
+            // extract video thumbnail once seeking is complete
+            video.addEventListener('seeked', () => {
+                // console.log(`video is now paused at ${seekTo}s`);
+                // define a canvas to have the same dimension as the video
+                const canvas = document.createElement('canvas');
+                canvas.width = video.videoWidth / 4;
+                canvas.height = video.videoHeight / 4;
+                // draw the video frame to canvas
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+                // return the canvas image as a blob
+                ctx.canvas.toBlob(
+                    blob => {
+                        resolve(blob);
+                    },
+                    "image/jpeg",
+                    0.75 /* quality */
+                );
+            });
+        });
+      });
+    }
   });
 });
 
-function getVideoCover(src, seekTo = 0.5) {
-  console.log(`getting video cover for file: ${src}`);
-  return new Promise((resolve) => {
-      // load the file to a video player
-      const video = document.createElement('video');
-      video.setAttribute('src', src);
-      video.load();
-      video.addEventListener('error', (e) => {
-          console.log(`error when loading video file ${e}`);
-          return new Error(e);
-      });
-      
-      // load metadata of the video to get video duration and dimensions
-      video.addEventListener('loadedmetadata', () => {
-          // seek to user defined timestamp (in seconds) if possible
-          if (video.duration < seekTo) {
-              return new Error('video is too short.');
-          }
-          // delay seeking or else 'seeked' event won't fire on Safari
-          setTimeout(() => {
-            video.currentTime = seekTo;
-          }, 200);
-          // extract video thumbnail once seeking is complete
-          video.addEventListener('seeked', () => {
-              // console.log(`video is now paused at ${seekTo}s`);
-              // define a canvas to have the same dimension as the video
-              const canvas = document.createElement('canvas');
-              canvas.width = video.videoWidth / 4;
-              canvas.height = video.videoHeight / 4;
-              // draw the video frame to canvas
-              const ctx = canvas.getContext('2d');
-              ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-              // return the canvas image as a blob
-              ctx.canvas.toBlob(
-                  blob => {
-                      resolve(blob);
-                  },
-                  "image/jpeg",
-                  0.75 /* quality */
-              );
-          });
-      });
-  });
-}
