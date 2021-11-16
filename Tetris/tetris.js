@@ -1,26 +1,17 @@
 "use strict";
+import BLOCKS from "./blocks.js"
 
 let score = 0;
 let duration = 500;
 let downInterval;
 let tempMovingItem;
 
-
 const movingItem = {
-  type: "tree",
+  type: "elLeft",
   direction: 0,
   top: 0,
   left: 3,
 };
-
-const BLOCKS = {
-  tree: [
-    [[1, 0], [0, 1], [1, 1], [2, 1]],
-    [[1, 0], [0, 1], [1, 1], [1, 2]],
-    [[2, 1], [0, 1], [1, 1], [1, 2]],
-    [[2, 1], [1, 0], [1, 1], [1, 2]],
-  ],
-}
 
 window.addEventListener('load', () => {
   const GAME_ROWS = 20;
@@ -41,7 +32,7 @@ window.addEventListener('load', () => {
       li.prepend(ul);
       playground.prepend(li);
     }
-    renderBlocks();
+    generateNewBlock();
   })();
 });
 
@@ -120,13 +111,16 @@ function renderBlocks(moveType = '') {
     });
     generateNewBlock();
   }
+}
 
-  function generateNewBlock() {
-    const [ORG_TOP, ORG_LEFT, ORG_DIR] = [0, 3, 0];
-    movingItem.top = ORG_TOP;
-    movingItem.left = ORG_LEFT;
-    movingItem.direction = ORG_DIR;
-    tempMovingItem = {...movingItem};
-    renderBlocks();
-  }
+function generateNewBlock() {
+  const [ORG_TOP, ORG_LEFT, ORG_DIR] = [0, 3, 0];
+  const entries = Object.entries(BLOCKS);
+  const rand = Math.floor(Math.random() * entries.length);
+  movingItem.type = entries[rand][0];
+  movingItem.top = ORG_TOP;
+  movingItem.left = ORG_LEFT;
+  movingItem.direction = ORG_DIR;
+  tempMovingItem = {...movingItem};
+  renderBlocks();
 }

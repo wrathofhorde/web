@@ -34,3 +34,18 @@ body {
 .tree {
   background: #67c23a;
 }
+.square {
+  background: blue;
+}
+.bar {
+  background: red;
+}
+.zee {
+  background: yellow;
+}
+.elLeft {
+  background: turquoise;
+}
+.elRight {
+  background: burlywood;
+}
