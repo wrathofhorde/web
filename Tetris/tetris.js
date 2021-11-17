@@ -5,6 +5,7 @@ let score = 0;
 let duration = 500;
 let downInterval;
 let tempMovingItem;
+const playground = document.querySelector('.playground > ul');
 
 const movingItem = {
   type: "elLeft",
@@ -14,26 +15,10 @@ const movingItem = {
 };
 
 window.addEventListener('load', () => {
-  const GAME_ROWS = 20;
-  const GAME_COLS = 10;
-  tempMovingItem = {...movingItem};
-
-  const playground = document.querySelector('.playground > ul');
-  
-  (function createBlocks() {
-    for (let i = 0; i < GAME_ROWS; ++i) {
-      const li = document.createElement('li');
-      const ul = document.createElement('ul');
-  
-      for (let j = 0; j < GAME_COLS; ++j) {
-        const matrix = document.createElement('li');
-        ul.prepend(matrix);
-      }
-      li.prepend(ul);
-      playground.prepend(li);
-    }
-    generateNewBlock();
-  })();
+  document.querySelector('.game-text > button').addEventListener('click', () => {
+    init();
+  });
+  init();
 });
 
 document.addEventListener('keydown', e => {
@@ -50,25 +35,34 @@ document.addEventListener('keydown', e => {
     case 'ArrowUp':
       rotateBlock();
       break;
+    case 'Space':
+      dropBlock();
+      break;
     default:
       break;
-  }
-
-  function moveBlock(moveType, amount) {
-    tempMovingItem[moveType] += amount;
-    renderBlocks(moveType);
   }
   function rotateBlock() {
     ++tempMovingItem.direction;
     tempMovingItem.direction %= 4;
     renderBlocks();
   }
+  function dropBlock() {
+    const DROP_TIME = 10;
+    clearInterval(downInterval);
+    downInterval = setInterval(() => {
+      moveBlock('top', 1);
+    }, DROP_TIME);
+  }
 });
+
+function moveBlock(moveType, amount) {
+  tempMovingItem[moveType] += amount;
+  renderBlocks(moveType);
+}
 
 function renderBlocks(moveType = '') {
   const [moving, seized] = ['moving', 'seized'];
   const {type, direction, top, left} = tempMovingItem;
-  const playground = document.querySelector('.playground > ul');
   const movingBlocks = document.querySelectorAll(`.${moving}`);
 
   movingBlocks.forEach(block => {
@@ -84,8 +78,12 @@ function renderBlocks(moveType = '') {
       target.classList.add(type, moving);
     } else {
       tempMovingItem = {...movingItem};
+      if (moveType === 'retry') {
+        clearInterval(downInterval);
+        showEndMessage();
+      }
       setTimeout(() => {
-        renderBlocks();
+        renderBlocks('retry');
         if (moveType === 'top') {
           seizeBlock();
         }
@@ -98,6 +96,11 @@ function renderBlocks(moveType = '') {
   movingItem.left = left;
   movingItem.direction = direction;
 
+  function showEndMessage() {
+    const text = document.querySelector('.game-text');
+    text.style.display = 'flex';
+  }
+
   function checkEmpty(target) {
     if (!target || target.classList.contains(seized)) return false;
     return true;
@@ -109,11 +112,36 @@ function renderBlocks(moveType = '') {
       block.classList.remove(moving);
       block.classList.add(seized);
     });
+    checkMatched();
+  }
+
+  function checkMatched() {
+    const hor = playground.childNodes;
+    hor.forEach(elem => {
+      let matched = true;
+      elem.children[0].childNodes.forEach(li => {
+        if (!li.classList.contains(seized)) {
+          matched = false;
+        }
+      });
+      if (matched) {
+        elem.remove();
+        prependNewLine();
+        ++score;
+        document.querySelector('.score').innerHTML = score;
+      }
+    });
+
     generateNewBlock();
   }
 }
 
 function generateNewBlock() {
+  clearInterval(downInterval);
+  downInterval = setInterval(() => {
+    moveBlock("top", 1);
+  }, duration);
+
   const [ORG_TOP, ORG_LEFT, ORG_DIR] = [0, 3, 0];
   const entries = Object.entries(BLOCKS);
   const rand = Math.floor(Math.random() * entries.length);
@@ -123,4 +151,32 @@ function generateNewBlock() {
   movingItem.direction = ORG_DIR;
   tempMovingItem = {...movingItem};
   renderBlocks();
+}
+
+function prependNewLine() {
+  const GAME_COLS = 10;
+  const li = document.createElement('li');
+  const ul = document.createElement('ul');
+
+  for (let j = 0; j < GAME_COLS; ++j) {
+    const matrix = document.createElement('li');
+    ul.prepend(matrix);
+  }
+  li.prepend(ul);
+  playground.prepend(li);
+}
+
+function init() {
+  const GAME_ROWS = 20;
+  tempMovingItem = {...movingItem};
+
+  playground.innerHTML = "";
+
+  for (let i = 0; i < GAME_ROWS; ++i) {
+    prependNewLine();
+  }
+  generateNewBlock();
+
+  const text = document.querySelector('.game-text');
+  text.style.display = 'none';
 }

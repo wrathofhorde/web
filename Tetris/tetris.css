@@ -31,6 +31,27 @@ body {
   height: 25px;
   outline: 1px solid #ccc;
 }
+.game-text {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(128, 128, 128, 0.7);
+  font-size: 40px;
+  color: aliceblue;
+  left: 0px;
+  top: 0px;
+}
+.game-text > button {
+  padding: 0.5rem 1rem;
+  color: #fff;
+  background: burlywood;
+  border: none;
+  cursor: pointer;
+}
 .tree {
   background: #67c23a;
 }
