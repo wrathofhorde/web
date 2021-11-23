@@ -12,6 +12,7 @@ header > h1 {
 
 nav {
   display: flex;
+  justify-content: center;
   align-items: center;
   height: 40px;
   background: rgb(102, 153, 255);
@@ -19,13 +20,14 @@ nav {
   top: 0;
 }
 
-nav > a {
-  color: rgb(225, 225, 225);
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  padding: 10px;
-  font-size: 15px;
+nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+nav ul li {
+  padding: 0px 10px;
 }
 
 main {
