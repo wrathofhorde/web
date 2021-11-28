@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="menu.css">
+  <link rel="stylesheet" href="dropdown.css">
   <!-- <script src="https://kit.fontawesome.com/daa1802c5e.js" crossorigin="anonymous"></script> -->
   <link rel="icon" href="./ico_timer.png">
   <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
@@ -12,8 +12,6 @@
 </head>
 <body>
   <header>
-    <!-- <h1><i class="fab fa-uncharted"></i>메뉴 테스트</h1> -->
-    <!-- <h1><i class='bx bx-book-open'></i>메뉴 테스트</h1> -->
     <h1>메뉴 테스트</h1>
     <h3>Coding everybody</h3>
   </header>
@@ -21,14 +19,21 @@
     <ul>
       <li>
         <div class="menu-title">
-          <a href="#">WEB</a>
+          <a class="active" href="#">WEB</a>
         </div>
         <div class="drop-down">
-          <span>JavaScript</span>
           <ul>
-            <li>ajax</li>
-            <li>node.js</li>
-            <li>React</li>
+            <li><a href="#">HTML</a></li>
+            <li><a href="#">CSS</a></li>
+            <li class="right-side"><a href="#">JavaScript</a><i class='bx bx-chevron-right'></i>
+              <div class="side-menu">
+                <ul>
+                  <li>Angular</li>
+                  <li>React</li>
+                  <li>Vue</li>
+                </ul>
+              </div>
+            </li>
           </ul>
         </div>
       </li>
