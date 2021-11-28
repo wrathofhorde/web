@@ -86,7 +86,12 @@ header h3 {
   color: var(--dropdown-font-color);
 }
 
-.drop-down li:hover{
+.drop-down li:hover {
+  background: #8291ad;
+  color: #f0f0f0;
+}
+
+.drop-down li:hover > a {
   background: #8291ad;
   color: #f0f0f0;
 }
