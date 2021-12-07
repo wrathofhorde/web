@@ -1,0 +1,78 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url(sea.jpg);
+  background-size: cover;
+  font-family: sans-serif;
+}
+
+.menu-bar {
+  background: #506377;
+  text-align: center;
+}
+.menu-bar ul {
+  display: flex;
+  justify-content: center;
+  list-style: none;
+  color: #fff;
+}
+.menu-bar ul li {
+  width: 150px;
+  padding: 10px;
+  margin: 10px;
+}
+.menu-bar ul li:hover {
+  background: #677e96;
+  border-radius: 2px;
+}
+
+.menu-bar ul li a {
+  text-decoration: none;
+  color: #fff;
+}
+.menu-bar .bx {
+  margin-right: 10px;
+}
+.sub-menu-1 {
+  display: none;
+}
+.menu-bar ul li:hover .sub-menu-1 {
+  display: block;
+  position: absolute;
+  background: #506377;
+  margin-top: 10px;
+  margin-left: -20px;
+}
+.menu-bar ul li:hover .sub-menu-1 ul {
+  display: block;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li{
+  background: transparent;
+  border-bottom: 1px dotted #aaa;
+  padding: 10px;
+  text-align: left;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li:last-child {
+  background: transparent;
+  border-bottom: none;
+}
+.menu-bar ul li:hover .sub-menu-1 ul li a:hover {
+  color: #aaa;
+}
+.bx-chevron-right {
+  float: right;
+}
+.sub-menu-2 {
+  display: none;
+}
+.side-menu:hover .sub-menu-2{
+  display: block;
+  position: absolute;
+  margin-left: 140px;
+  margin-top: -42px;
+  background: #506377;
+}
