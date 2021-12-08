@@ -7,7 +7,7 @@ body {
   justify-content: space-between;
   align-items: center;
   background-color: #132952;
-  padding: 0px 10px;
+  padding: 10px 10px;
 }
 .navbar ul {
   padding-left: 0;
@@ -16,9 +16,14 @@ body {
 .navbar ul li {
   list-style: none;
 }
-.nav-logo {
+.nav-logo i {
   font-size: 1rem;
   color:whitesmoke;
+}
+.nav-logo a {
+  font-size: 1rem;
+  color:whitesmoke;
+  text-decoration: none;
 }
 .nav-menu {
   display: flex;
@@ -47,7 +52,7 @@ body {
 .nav-toogle {
   display: none;
   position: absolute;
-  top:0px;
+  top:5px;
   right:10px;
   font-size: 1.5rem;
   color:whitesmoke;
