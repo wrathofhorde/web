@@ -7,6 +7,8 @@ const dataIndex = 'data-index';
 let timeCount = null;
 let timeForPlaying = 0;
 
+
+
 function startGame() {
   const timeForStart = 3000;
   let tiles = createImageTiles();

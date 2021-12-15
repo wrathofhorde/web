@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Round</title>
+  <style>
+    body {
+      height: 1000px;
+      padding: 4em 4em;
+      background-color: darkgray;
+    }
+    p {
+      margin: 0;
+    }
+    button {
+      padding: 0.2em 0.5em;
+      margin: 0 1em;
+    }
+    .display {
+      width: 7em;
+      padding: 0.5em 1em;
+      border-radius: 2em;
+      position: relative;
+      background-color: whitesmoke;
+      margin-bottom: 1em;
+    }
+    .button {
+      position: absolute;
+      display: flex;
+      top: 3px;
+      right: 3px;
+      width: 2em;
+      height: 2em;
+      border-radius: 2em;
+      vertical-align: middle;
+      background-color:slategrey;
+      justify-content: center;
+      align-items: center;
+      text-decoration: none;
+    }
+    .button:hover {
+      background-color: rgb(96, 111, 126);
+      /* background-color: black; */
+    }
+    .display .button i {
+      color: whitesmoke;
+    }
+    .value {
+      color:cadetblue;
+    }
+    .value::after {
+      content: 'cm';
+      margin-left: 3px;
+    }
+    body > section :nth-child(4) {
+      margin-bottom: 1em;
+    }
+    body > section :nth-child(5) {
+      margin-left: 0;
+    }
+  </style>
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <script src="round.js" defer></script>
+</head>
+<body>
+  <div class="display">
+    <span class="value">0</span>
+    <a href="#" class="button"><i class='bx bx-plus-medical'></i></a>
+  </div>
+  <section>
+    <p>이거슨 당신이 자바스크립트를 다뤄봤는지를 묻는 테스트입니다.</p>
+    <p>아래 문장에서 java를 버튼에 해당하는 언어로 바꿔보세요.</p>
+    <p>
+      당신이 공부하는 언어는 <span class="quiz-text">Java</span>입니까?
+    </p>
+    <p class="quiz-p">
+      당신이 공부하는 언어는 Java입니까?
+    </p>
+    <button id="jsBtn" class="JavaScript" type="button">JavaScript</button>
+    <button id="pyBtn" class="Python" type="button">Python</button>
+    <button id="cBtn" class="C/C++" type="button">C/C++</button>
+  </section>
+  
+</body>
+</html>
