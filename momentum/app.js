@@ -1,5 +1,9 @@
-const h1 = document.querySelector('.title');
+const loginForm = document.querySelector('#input-form');
+const loginInput = loginForm.querySelector('input');
 
-h1.addEventListener('mouseenter', () => {
-  h1.classList.toggle('active');
+loginForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  console.log(loginInput.value);
+  loginInput.value = "";
 });
+
