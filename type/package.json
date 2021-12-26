@@ -1,0 +1,16 @@
+{
+  "name": "typechain",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node dst/index.js",
+    "prestart": "tsc"
+  },
+  "devDependencies": {
+    "tsc-watch": "^4.6.0"
+  },
+  "dependencies": {
+    "crypto-js": "^4.1.1"
+  }
+}
