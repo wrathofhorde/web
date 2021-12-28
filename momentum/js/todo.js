@@ -20,21 +20,22 @@ function saveTodos() {
   localStorage.setItem(TODO_KEY, JSON.stringify(toDos));
 }
 
-function printTodo(todo) {
+function printTodo(todoObj) {
   const li = document.createElement('li');
   const span = document.createElement('span');
   const button = document.createElement('button');
   
-  span.innerText = todo;
+  li.id = todoObj.id;
+  span.innerText = todoObj.text;
   button.innerText = '❌';
   button.addEventListener('click', (event) => {
-    const todo = event.target.previousSibling.innerText;
-    const index = toDos.indexOf(todo);
+    const li = event.target.parentNode;
+    const index = toDos.findIndex(todo => todo.id === parseInt(li.id));
     if (index !== -1) {
       toDos.splice(index, 1);
       saveTodos();
     }
-    const li = event.target.parentNode;
+
     li.remove();
   });
 
@@ -48,8 +49,12 @@ todoForm.addEventListener('submit', (event) => {
   event.preventDefault();
   const todo = todoInput.value;
   todoInput.value = "";
+  const todoObj = {
+    text: todo,
+    id: Date.now(),
+  };
 
-  toDos.push(todo);
-  printTodo(todo);
+  toDos.push(todoObj);
+  printTodo(todoObj);
   saveTodos();
 });
