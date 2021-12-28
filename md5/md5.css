@@ -40,6 +40,14 @@ body {
   background-color: #c5cae9;
   font-size: 3rem;
   border-radius: 4px;
+  color: black;
+  font-weight:bold;
+}
+.display.OK {
+  color:green;
+}
+.display.NG {
+  color: crimson;
 }
 .button {
   width: 100%;
