@@ -1,9 +1,9 @@
 (function onLoad(params) {
   const FILE_SIZE = 42236928;
-  const STR_OK = 'OK';
-  const STR_NG = 'NG';
-  const STR_CHECKING = 'Checking...';
-  const HASH_KEY = '7757c2a407df65edbd96f91f719b2c05';
+  const STR_OK = "OK";
+  const STR_NG = "NG";
+  const STR_CHECKING = "Checking...";
+  const HASH_KEY = "7757c2a407df65edbd96f91f719b2c05";
   const display = document.querySelector(".display");
   const btn = document.querySelector(".button");
   const select = document.querySelector(".select");
@@ -25,7 +25,7 @@
       alert("Invalid path");
       return;
     }
-    
+    const startTime = new Date().getTime();
     display.innerText = STR_CHECKING;
     display.classList.remove(STR_NG);
     display.classList.remove(STR_OK);
@@ -42,6 +42,7 @@
         display.innerText = STR_NG;
         display.classList.add(STR_NG);
       }
+      console.log(new Date().getTime() - startTime);
     });
 
     file

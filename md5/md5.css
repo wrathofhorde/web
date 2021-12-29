@@ -12,12 +12,12 @@ body {
 #container {
   width: 400px;
   height: 300px;
-  border: 2px solid lightgray;
+  border: 1px solid #64687e;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: center ;
+  align-items: center;
   padding: 0 10px 0;
   background-color: #e8eaf6;
 }
@@ -41,10 +41,10 @@ body {
   font-size: 3rem;
   border-radius: 4px;
   color: black;
-  font-weight:bold;
+  font-weight: bold;
 }
 .display.OK {
-  color:green;
+  color: green;
 }
 .display.NG {
   color: crimson;
@@ -56,6 +56,7 @@ body {
   border-radius: 4px;
   border: 1px solid darkgrey;
   background-color: #e8eaf6;
+  transition: all 0.3s;
 }
 .button:hover {
   border: none;
